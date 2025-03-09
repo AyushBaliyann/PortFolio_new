@@ -1,0 +1,489 @@
+:root {
+    --neon-pink: #ff00ff;
+    --neon-cyan: #00ffff;
+    --matrix-green: #0f0;
+    --hologram-blue: #00f7ff;
+    --background: #000;
+}
+
+*{
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar{
+display: none;
+}
+
+body {
+    scroll-behavior: smooth;
+    margin: 0;
+    background: var(--background);
+    color: white;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: %2300ffff;transform: ;msFilter:;"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M13 7h-2v5h5v-2h-3z"></path></svg>'), auto;
+}
+
+
+/* Matrix rain background */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+#cyber-scroll-hud {
+position: fixed;
+right: 2rem;
+top: 50%;
+transform: translateY(-50%);
+height: 300px;
+width: 4px;
+background: rgba(255, 255, 255, 0.1);
+z-index: 1000;
+}
+
+.hud-line {
+position: absolute;
+width: 100%;
+height: 30px;
+background: linear-gradient(
+to bottom,
+var(--neon-cyan),
+var(--neon-pink)
+);
+box-shadow: 0 0 15px var(--hologram-blue);
+transition: top 0.1s ease-out;
+}
+
+.hud-percent {
+position: absolute;
+right: 2rem;
+color: var(--neon-cyan);
+font-family: 'Courier New', monospace;
+font-size: 1.2rem;
+text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* Cyberpunk header */
+.cyber-header {
+    text-align: center;
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-header h1 {
+    font-size: 5rem;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    animation: glitch 3s infinite;
+    text-shadow: 3px 3px var(--neon-pink),
+                -3px -3px var(--neon-cyan);
+}
+
+/* Navigation */
+.cyber-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.cyber-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 1rem;
+    list-style: none;
+}
+
+.cyber-nav a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    padding: 1rem;
+    transition: all 0.3s;
+}
+
+.cyber-nav a:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.cyber-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: var(--neon-pink);
+    transition: width 0.3s;
+}
+
+.cyber-nav a:hover::after {
+    width: 100%;
+}
+
+/* Hologram card effect */
+.hologram-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.5s;
+    overflow: hidden;
+}
+
+.hologram-card:hover {
+    transform: translateZ(20px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 0 50px var(--hologram-blue);
+}
+
+.hologram-card::before {
+    content: '';
+position: absolute;
+inset: 0;
+background: linear-gradient(45deg,
+transparent 20%,
+var(--hologram-blue) 50%,
+transparent 80%);
+opacity: 0;
+transition: opacity 0.5s;
+pointer-events: none; 
+}
+
+.hologram-card:hover::before {
+    opacity: 0.3;
+}
+
+/* Project grid */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.project-card {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid transparent;
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.project-card:hover {
+    border-image: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan));
+    border-image-slice: 1;
+    transform: translateY(-10px);
+}
+
+/* Add to existing CSS */
+.project-card::before {
+content: '>_ SCROLL_DATA_STREAM_ACTIVE';
+position: absolute;
+bottom: -1.5em;
+left: 0;
+color: var(--matrix-green);
+font-size: 0.8em;
+opacity: 0;
+transition: all 0.5s;
+}
+
+.project-card:hover::before {
+opacity: 1;
+animation: data-stream 2s infinite;
+}
+
+@keyframes data-stream {
+0% { content: '>_ LOADING_PROJECT_DATA'; }
+25% { content: '>_ DECRYPTING_FILES_####'; }
+50% { content: '>_ ACCESS_GRANTED_#####'; }
+75% { content: '>_ INITIALIZING_HOLO_UI'; }
+}
+
+/* Skill bars */
+.skill-bar {
+    background: rgba(255, 255, 255, 0.1);
+    height: 30px;
+    border-radius: 15px;
+    margin: 1rem 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg,
+        var(--neon-pink),
+        var(--neon-cyan));
+    width: 0;
+    transition: width 1s ease-in-out;
+    position: relative;
+}
+
+.skill-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent);
+    animation: shine 2s infinite;
+}
+
+.cyber-form input,
+.cyber-form textarea {
+background: rgba(255, 255, 255, 0.1);
+border: 2px solid var(--neon-cyan);
+padding: 1rem;
+margin: 1rem 0;
+color: white;
+width: 100%;
+transition: all 0.3s;
+position: relative; /* Add this line */
+z-index: 2;
+}
+
+.cyber-form input:focus,
+.cyber-form textarea:focus {
+outline: none;
+box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+.cyber-form input::placeholder,
+.cyber-form textarea::placeholder {
+color: rgba(255, 255, 255, 0.7);
+}
+
+.cyber-button {
+position: relative;
+padding: 1.5rem 3rem;
+border: none;
+border-radius: 15px;
+overflow: hidden;
+cursor: pointer;
+/*background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan));*/
+background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan));
+color: black;
+font-weight: bold;
+text-transform: uppercase;
+transition: all 0.5s ease;
+transform-style: preserve-3d;
+perspective: 1000px;
+margin-top: 1rem;
+font-family: monospace;
+}
+
+.cyber-button::before,
+.cyber-button::after {
+content: '';
+position: absolute;
+inset: 0;
+border-radius: 15px;
+transition: all 0.5s ease;
+pointer-events: none;
+}
+
+.cyber-button::before {
+background: linear-gradient(
+45deg,
+transparent 20%,
+rgba(255, 255, 255, 0.3) 50%,
+transparent 80%
+);
+opacity: 0;
+background-size: 200% 200%;
+}
+
+.cyber-button::after {
+border: 2px solid rgba(255, 255, 255, 0.5);
+opacity: 0;
+transform: scale(1.1);
+}
+
+.cyber-button:hover::before {
+opacity: 1;
+background-position: 100% 100%;
+}
+
+.cyber-button:hover::after {
+opacity: 1;
+transform: scale(1);
+}
+
+.cyber-button:active {
+transform: translateY(0) scale(0.95);
+filter: brightness(1.2);
+}
+
+.btn-text {
+position: relative;
+z-index: 2;
+background: linear-gradient(45deg, #fff, #e6e6e6);
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.fancy-btn-shadow {
+position: absolute;
+width: 100%;
+height: 100%;
+background: radial-gradient(circle at 50% 50%, 
+rgba(255, 0, 255, 0.4) 0%, 
+transparent 70%);
+filter: blur(10px);
+opacity: 0;
+transition: all 0.5s ease;
+}
+
+.cyber-button:hover .fancy-btn-shadow {
+opacity: 0.3;
+transform: translateY(20px) scale(0.9);
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-5px, 5px); }
+    40% { transform: translate(5px, -5px); }
+    60% { transform: translate(-5px, 5px); }
+    80% { transform: translate(5px, -5px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+@media (max-width: 1200px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cyber-header h1 {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cyber-nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+
+    .cyber-header {
+        padding: 3rem 0;
+    }
+
+    .cyber-header h1 {
+        font-size: 3rem;
+    }
+
+    .hologram-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .skill-bar {
+        height: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cyber-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .cyber-nav ul {
+        gap: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .cyber-nav a {
+        padding: 0.5rem;
+    }
+
+    .project-card {
+        padding: 1rem;
+    }
+
+    .cyber-form input,
+    .cyber-form textarea {
+        padding: 0.8rem;
+    }
+
+    .cyber-button {
+        padding: 0.8rem 1.5rem;
+    }
+
+    /* Adjust matrix characters for mobile */
+    #matrix-canvas {
+        font-size: 10px;
+    }
+}
+
+/* Mobile menu toggle (optional) */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1001;
+    background: var(--neon-cyan);
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .cyber-nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 1rem;
+    }
+
+    .cyber-nav.active ul {
+        display: flex;
+    }
+}
+
+/* Ensure hover states work on touch devices */
+@media (hover: hover) and (pointer: fine) {
+    .project-card:hover {
+        transform: translateY(-10px);
+    }
+}
+
+/* Always show tap states on mobile */
+@media (hover: none) {
+    .project-card:active {
+        transform: translateY(-5px);
+    }
+}

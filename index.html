@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button class="menu-toggle" onclick="document.querySelector('.cyber-nav').classList.toggle('active')">
+        ☰
+    </button>
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Add below matrix-canvas -->
+<div id="cyber-scroll-hud">
+    <div class="hud-line"></div>
+    <div class="hud-percent">0%</div>
+</div>
+    
+    <nav class="cyber-nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="cyber-header">
+        <h1>Ayush</h1>
+        <p>Full-Stack developer</p>
+    </section>
+
+    <section id="projects" class="hologram-card">
+        <h2>// Recent Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>CyberFlix</h3>
+                <p>Find your Favourite Movies</p>
+                <p><a href="https://ayushbaliyann.github.io/CyberFlix/" style="color:white; text-decoration: underline; text-underline-offset: 3px;">🔗 CHECK IT OUT</a></p>
+            </div>
+
+            <div class="project-card">
+                <h3>CyberFlix</h3>
+                <p>Find your Favourite Movies</p>
+                <p><a href="https://ayushbaliyann.github.io/CyberFlix/" style="color:white; text-decoration: underline; text-underline-offset: 3px;">🔗 CHECK IT OUT</a></p>
+            </div>
+
+            <div class="project-card">
+                <h3>CyberFlix</h3>
+                <p>Find your Favourite Movies</p>
+                <p><a href="https://ayushbaliyann.github.io/CyberFlix/" style="color:white; text-decoration: underline; text-underline-offset: 3px;">🔗 CHECK IT OUT</a></p>
+            </div>
+
+            <div class="project-card">
+                <h3>CyberFlix</h3>
+                <p>Find your Favourite Movies</p>
+                <p><a href="https://ayushbaliyann.github.io/CyberFlix/" style="color:white; text-decoration: underline; text-underline-offset: 3px;">🔗 CHECK IT OUT</a></p>
+            </div>
+
+            <div class="project-card">
+                <h3>CyberFlix</h3>
+                <p>Find your Favourite Movies</p>
+                <p><a href="https://ayushbaliyann.github.io/CyberFlix/" style="color:white; text-decoration: underline; text-underline-offset: 3px;">🔗 CHECK IT OUT</a></p>
+            </div>
+
+            <div class="project-card">
+                <h3>CyberFlix</h3>
+                <p>Find your Favourite Movies</p>
+                <p><a href="https://ayushbaliyann.github.io/CyberFlix/" style="color:white; text-decoration: underline; text-underline-offset: 3px;">🔗 CHECK IT OUT</a></p>
+            </div>
+
+            <!-- Add more project cards -->
+        </div>
+    </section>
+
+    <section id="skills" class="hologram-card">
+        <h1>// SKILLS</h1>
+        <h2>JAVA</h2>
+        <div class="skill-bar">
+            <div class="skill-fill" data-level="80%"></div>
+        </div>
+
+        <h2>JavaScript</h2>
+        <div class="skill-bar">
+            <div class="skill-fill" data-level="72%"></div>
+        </div>
+        <!-- Add more skills -->
+    </section>
+    
+    <section id="contact" class="hologram-card">
+        <h2>//Send Your Message</h2>
+        <form class="cyber-form">
+            <input type="text" placeholder="Encryption Key (Name)" required style="width: 95%;">
+            <input type="email" placeholder="Frequency Channel (Email)" required style="width: 95%;">
+            <textarea placeholder="Transmission Content" rows="5" required style="width: 95%;"></textarea>
+            <button type="submit" class="cyber-button">
+                <span class="btn-text">Transmit</span>
+                <div class="fancy-btn-shadow"></div>
+            </button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
